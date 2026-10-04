@@ -1,4 +1,5 @@
 import { STRINGS, SUPPORTED, DEFAULT_LANG } from "./i18n.js";
+import { initDemo } from "./demo.js";
 
 const STORAGE_KEY = "kk.lang";
 
@@ -39,9 +40,11 @@ export function applyLanguage(lang) {
     toggle.setAttribute("aria-label", dict["lang.switchLabel"]);
     toggle.lang = lang === "hi" ? "en" : "hi";
   }
+  document.dispatchEvent(new CustomEvent("kk:lang", { detail: { lang } }));
 }
 
 function init() {
+  initDemo();
   let lang = readSavedLang() || DEFAULT_LANG;
   if (lang !== DEFAULT_LANG) applyLanguage(lang);
 

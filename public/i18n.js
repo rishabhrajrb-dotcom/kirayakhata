@@ -2,7 +2,9 @@
 // (enforced by tests/i18n.test.js). No tax rates or thresholds belong here —
 // those live only in shared/compliance-config.js.
 
-export const STRINGS = {
+import { APP_STRINGS } from "./i18n-app.js";
+
+const PAGE_STRINGS = {
   en: {
     "skip": "Skip to main content",
     "wordmarkLabel": "KirayaKhata home",
@@ -88,14 +90,9 @@ export const STRINGS = {
     "features.g4c": "Clear flags when a CA should look",
 
     "demo.title": "Close this month’s rent",
-    "demo.soon": "The live checker opens here in the next build.",
-    "demo.desc": "You will be able to load a ready example — a commercial shop at ₹1,00,000 a month — and close the month in one click, or enter your own details in three short steps. No login needed.",
-
-    "usage.title": "Usage so far",
     "usage.rent": "rent checked with KirayaKhata",
     "usage.months": "months closed",
     "usage.common": "most common case",
-    "usage.note": "Live numbers appear once the checker is running.",
 
     "pricing.title": "Simple pricing",
     "pricing.sub": "Indicative prices. The demo on this page is free.",
@@ -130,7 +127,7 @@ export const STRINGS = {
     "faq.q7": "Residential or commercial — does it matter?",
     "faq.a7": "Yes. GST treats a house rented to someone who lives in it differently from a shop, office or warehouse, and the answer can change if the tenant is GST-registered or uses the home for business. KirayaKhata asks simple questions and, where the facts are unclear, says a CA should confirm.",
     "faq.q8": "Is my tax information safe?",
-    "faq.a8": "The demo does not ask for your PAN, GSTIN, phone, email, address or bank details, and never for portal passwords. What we save is anonymised, such as the rent amount and property type. Names you type for a receipt stay in your browser.",
+    "faq.a8": "We never ask for your PAN, bank details or portal passwords. What our server saves is anonymised, such as the rent amount and property type. Names, GSTINs and emails you type for an invoice stay on your device and are never sent to us.",
     "faq.q9": "Which tax year am I currently working on?",
     "faq.a9": "Indian tax years run from 1 April to 31 March. You don’t need to remember which one is current: KirayaKhata works it out from the date of each rent payment and labels it plainly, for example “Rent earned Apr 2026–Mar 2027”.",
 
@@ -224,14 +221,9 @@ export const STRINGS = {
     "features.g4c": "जब CA को देखना चाहिए, साफ़ संकेत",
 
     "demo.title": "इस महीने का किराया बंद करें",
-    "demo.soon": "लाइव जाँच अगले चरण में यहीं खुलेगी।",
-    "demo.desc": "आप एक तैयार उदाहरण — ₹1,00,000 महीने की कमर्शियल दुकान — लोड करके एक क्लिक में महीना बंद कर सकेंगे, या तीन छोटे चरणों में अपनी जानकारी डाल सकेंगे। लॉगिन की ज़रूरत नहीं।",
-
-    "usage.title": "अब तक का उपयोग",
     "usage.rent": "किराया किरायाखाता से जाँचा गया",
     "usage.months": "महीने बंद किए गए",
     "usage.common": "सबसे आम मामला",
-    "usage.note": "जाँच चालू होते ही असली आँकड़े यहाँ दिखेंगे।",
 
     "pricing.title": "सीधी-सादी क़ीमत",
     "pricing.sub": "अनुमानित क़ीमतें। इस पेज का डेमो मुफ़्त है।",
@@ -266,7 +258,7 @@ export const STRINGS = {
     "faq.q7": "रिहायशी या कमर्शियल — क्या फ़र्क़ पड़ता है?",
     "faq.a7": "हाँ। रहने के लिए किराये पर दिया घर GST में दुकान, ऑफ़िस या गोदाम से अलग माना जाता है, और अगर किरायेदार GST में रजिस्टर्ड है या घर का कारोबारी इस्तेमाल करता है तो जवाब बदल सकता है। किरायाखाता आसान सवाल पूछता है, और जहाँ बात साफ़ न हो, वहाँ CA से पक्का करवाने को कहता है।",
     "faq.q8": "क्या मेरी टैक्स जानकारी सुरक्षित है?",
-    "faq.a8": "डेमो आपका PAN, GSTIN, फ़ोन, ईमेल, पता या बैंक जानकारी नहीं माँगता, और पोर्टल पासवर्ड कभी नहीं। हम जो सहेजते हैं वह गुमनाम होता है, जैसे किराये की रक़म और प्रॉपर्टी का प्रकार। रसीद के लिए लिखे नाम आपके ब्राउज़र में ही रहते हैं।",
+    "faq.a8": "हम कभी आपका PAN, बैंक जानकारी या पोर्टल पासवर्ड नहीं माँगते। हमारा सर्वर जो सहेजता है वह गुमनाम होता है, जैसे किराये की रक़म और प्रॉपर्टी का प्रकार। इनवॉइस के लिए लिखे नाम, GSTIN और ईमेल आपके डिवाइस पर ही रहते हैं, हमें कभी नहीं भेजे जाते।",
     "faq.q9": "अभी मैं किस टैक्स साल पर काम कर रहा हूँ?",
     "faq.a9": "भारत में टैक्स साल 1 अप्रैल से 31 मार्च तक चलता है। आपको याद रखने की ज़रूरत नहीं कि अभी कौन-सा चल रहा है: किरायाखाता हर किराये की तारीख़ से इसे खुद समझ लेता है और साफ़ लिखता है, जैसे “किराया अप्रैल 2026–मार्च 2027”।",
 
@@ -276,5 +268,16 @@ export const STRINGS = {
   },
 };
 
+export const STRINGS = {
+  en: { ...PAGE_STRINGS.en, ...APP_STRINGS.en },
+  hi: { ...PAGE_STRINGS.hi, ...APP_STRINGS.hi },
+};
+
 export const SUPPORTED = Object.keys(STRINGS);
+
+/** Translate `key` with {placeholders}. Falls back to English, then the key. */
+export function t(lang, key, params = {}) {
+  const s = STRINGS[lang]?.[key] ?? STRINGS.en[key] ?? key;
+  return s.replace(/\{(\w+)\}/g, (m, k) => (params[k] !== undefined ? String(params[k]) : m));
+}
 export const DEFAULT_LANG = "en";

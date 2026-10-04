@@ -208,25 +208,190 @@
     </div>
   </section>
 
-  <!-- LIVE DEMO (placeholder) -->
-  <section class="section" id="demo" aria-labelledby="demo-title">
+  <!-- LIVE DEMO: Close this month's rent -->
+  <section class="section demo" id="demo" aria-labelledby="demo-title">
     <div class="wrap">
       <h2 id="demo-title" data-i18n="demo.title">Close this month’s rent</h2>
-      <div class="placeholder-panel">
-        <p class="placeholder-head" data-i18n="demo.soon">The live checker opens here in the next build.</p>
-        <p data-i18n="demo.desc">You will be able to load a ready example — a commercial shop at ₹1,00,000 a month — and close the month in one click, or enter your own details in three short steps. No login needed.</p>
+      <p class="section-lede" data-i18n="d.lede">See in seconds whether this month’s rent, GST and TDS add up — and what is due next. No login needed.</p>
+
+      <div class="demo-start" id="demo-start">
+        <div class="start-card start-example">
+          <h3 data-i18n="d.exTitle">Try a ready example</h3>
+          <p data-i18n="d.exDesc">A shop rented to a company at ₹1,00,000 a month. Both are GST-registered.</p>
+          <button type="button" class="btn btn-primary" id="btn-example" data-i18n="d.exBtn">Load the example</button>
+        </div>
+        <div class="start-card">
+          <h3 data-i18n="d.ownTitle">Enter my own details</h3>
+          <p data-i18n="d.ownDesc">Three short steps. Keep your rent agreement handy.</p>
+          <button type="button" class="btn btn-quiet" id="btn-own" data-i18n="d.ownBtn">Start</button>
+        </div>
       </div>
+
+      <div class="saved" id="saved" hidden>
+        <h3 data-i18n="d.savedTitle">Your saved results</h3>
+        <ul id="saved-list"></ul>
+      </div>
+
+      <p class="notice notice-cap" id="cap-notice" role="status" hidden></p>
+
+      <form id="close-form" class="close-form" novalidate hidden>
+        <ol class="stepper" id="stepper">
+          <li data-step="1"><span class="stepper-num">1</span><span data-i18n="d.s1">About you</span></li>
+          <li data-step="2"><span class="stepper-num">2</span><span data-i18n="d.s2">Property and tenant</span></li>
+          <li data-step="3"><span class="stepper-num">3</span><span data-i18n="d.s3">This month</span></li>
+        </ol>
+
+        <!-- STEP 1 -->
+        <div class="step" data-step="1">
+          <fieldset class="q" data-field="gstRegistered">
+            <legend data-i18n="f.gstReg">Are you registered for GST?</legend>
+            <div class="cards cards-3">
+              <label class="rcard"><input type="radio" name="gstRegistered" value="yes"><span data-i18n="opt.yes">Yes</span></label>
+              <label class="rcard"><input type="radio" name="gstRegistered" value="no"><span data-i18n="opt.no">No</span></label>
+              <label class="rcard"><input type="radio" name="gstRegistered" value="unsure"><span data-i18n="opt.notSure">Not sure</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-field="filingFrequency" data-show="gstRegistered=yes">
+            <legend data-i18n="f.freq">How often do you report GST?</legend>
+            <div class="cards cards-2">
+              <label class="rcard"><input type="radio" name="filingFrequency" value="monthly"><span data-i18n="opt.monthly">Every month</span></label>
+              <label class="rcard"><input type="radio" name="filingFrequency" value="quarterly"><span data-i18n="opt.quarterly">Every quarter</span><small>QRMP</small></label>
+            </div>
+          </fieldset>
+          <div class="q" data-field="state">
+            <label class="q-label" for="f-state" data-i18n="f.state">Which state is the property in?</label>
+            <select id="f-state" name="state" class="input"></select>
+          </div>
+          <fieldset class="q" data-field="seniorCitizen">
+            <legend data-i18n="f.senior">Are you 60 or older?</legend>
+            <div class="cards cards-2">
+              <label class="rcard"><input type="radio" name="seniorCitizen" value="yes"><span data-i18n="opt.yes">Yes</span></label>
+              <label class="rcard"><input type="radio" name="seniorCitizen" value="no"><span data-i18n="opt.no">No</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" data-step="2" hidden>
+          <fieldset class="q" data-field="propertyType">
+            <legend data-i18n="f.propType">What kind of property is it?</legend>
+            <div class="cards cards-2">
+              <label class="rcard"><input type="radio" name="propertyType" value="commercial"><span data-i18n="opt.commercial">Shop / office / warehouse</span></label>
+              <label class="rcard"><input type="radio" name="propertyType" value="residential"><span data-i18n="opt.residential">House / flat</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-field="residentialUse" data-show="propertyType=residential">
+            <legend data-i18n="f.resUse">How does the tenant use the house?</legend>
+            <div class="cards cards-2">
+              <label class="rcard"><input type="radio" name="residentialUse" value="home"><span data-i18n="opt.home">As their home</span></label>
+              <label class="rcard"><input type="radio" name="residentialUse" value="business"><span data-i18n="opt.business">For business (office, shop)</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-field="tenantType">
+            <legend data-i18n="f.tenantType">Who is renting it?</legend>
+            <div class="cards cards-2">
+              <label class="rcard"><input type="radio" name="tenantType" value="company"><span data-i18n="opt.company">A company</span></label>
+              <label class="rcard"><input type="radio" name="tenantType" value="firm"><span data-i18n="opt.firm">A partnership / LLP</span></label>
+              <label class="rcard"><input type="radio" name="tenantType" value="individual_business"><span data-i18n="opt.indBiz">A person running a business</span></label>
+              <label class="rcard"><input type="radio" name="tenantType" value="individual_personal"><span data-i18n="opt.indPersonal">A person, for personal use</span></label>
+              <label class="rcard"><input type="radio" name="tenantType" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-field="tenantGst" data-show="tenantType=company,firm,individual_business">
+            <legend data-i18n="f.tenantGst">Is the tenant registered for GST?</legend>
+            <p class="q-hint" data-i18n="f.tenantGstHint">Their invoices or letterhead usually show a 15-character GSTIN.</p>
+            <div class="cards cards-3">
+              <label class="rcard"><input type="radio" name="tenantGst" value="yes"><span data-i18n="opt.yes">Yes</span></label>
+              <label class="rcard"><input type="radio" name="tenantGst" value="no"><span data-i18n="opt.no">No</span></label>
+              <label class="rcard"><input type="radio" name="tenantGst" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-field="composition" data-show="tenantGst=yes" data-show2="propertyType=commercial" data-show3="gstRegistered=no">
+            <legend data-i18n="f.composition">Does the tenant’s GST certificate say “Composition”?</legend>
+            <div class="cards cards-3">
+              <label class="rcard"><input type="radio" name="composition" value="yes"><span data-i18n="opt.yes">Yes</span></label>
+              <label class="rcard"><input type="radio" name="composition" value="no"><span data-i18n="opt.no">No</span></label>
+              <label class="rcard"><input type="radio" name="composition" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+            </div>
+          </fieldset>
+
+          <h3 class="sub-head" data-i18n="f.agreementHead">From your rent agreement</h3>
+          <div class="grid-2">
+            <div class="q" data-field="monthlyRent">
+              <label class="q-label" for="f-rent" data-i18n="f.rent">Monthly rent in the agreement (₹)</label>
+              <input id="f-rent" name="monthlyRent" class="input input-money" inputmode="numeric" autocomplete="off" placeholder="1,00,000">
+            </div>
+            <div class="q" data-field="yearlyIncreasePct">
+              <label class="q-label" for="f-incr" data-i18n="f.increase">Yearly rent increase (%)</label>
+              <input id="f-incr" name="yearlyIncreasePct" class="input" inputmode="decimal" autocomplete="off" value="0">
+            </div>
+            <div class="q" data-field="startMonth">
+              <span class="q-label" id="l-start" data-i18n="f.start">Agreement started</span>
+              <div class="month-pick" data-month="startMonth" aria-labelledby="l-start"></div>
+            </div>
+            <div class="q" data-field="endMonth">
+              <span class="q-label" id="l-end" data-i18n="f.end">Agreement ends (optional)</span>
+              <div class="month-pick" data-month="endMonth" data-optional="1" aria-labelledby="l-end"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" data-step="3" hidden>
+          <div class="q" data-field="period">
+            <span class="q-label" id="l-period" data-i18n="f.period">Which month are you closing?</span>
+            <div class="month-pick" data-month="period" aria-labelledby="l-period"></div>
+          </div>
+          <p class="preview" id="preview-rent" aria-live="polite"></p>
+          <div class="grid-2">
+            <div class="q" data-field="amountReceived">
+              <label class="q-label" for="f-received" data-i18n="f.received">Amount that reached your bank (₹)</label>
+              <input id="f-received" name="amountReceived" class="input input-money" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="q" data-field="tdsReported">
+              <label class="q-label" for="f-tds" data-i18n="f.tds">TDS your tenant says they deducted (₹)</label>
+              <input id="f-tds" name="tdsReported" class="input input-money" inputmode="numeric" autocomplete="off" value="0">
+            </div>
+            <div class="q" data-field="otherCharges">
+              <label class="q-label" for="f-charges" data-i18n="f.charges">Separately billed charges, e.g. maintenance (₹)</label>
+              <input id="f-charges" name="otherCharges" class="input input-money" inputmode="numeric" autocomplete="off" value="0">
+            </div>
+            <div class="q" data-field="receiptDate">
+              <label class="q-label" for="f-date" data-i18n="f.date">Date the money arrived (optional)</label>
+              <input id="f-date" name="receiptDate" class="input" type="date">
+            </div>
+          </div>
+          <p class="preview" id="preview-bank" aria-live="polite"></p>
+          <details class="unusual">
+            <summary data-i18n="f.unusual">Something unusual this month?</summary>
+            <label class="q-label" for="f-note" data-i18n="f.noteLabel">Tell us in a line (optional)</label>
+            <textarea id="f-note" name="note" class="input" maxlength="200" rows="2"></textarea>
+            <p class="q-hint"><span id="note-count">0</span>/200 · <span data-i18n="f.noteHint">Not saved. Used only to explain this month.</span></p>
+          </details>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <div class="form-nav">
+          <button type="button" class="btn btn-quiet" id="btn-back" data-i18n="d.back">Back</button>
+          <button type="button" class="btn btn-primary" id="btn-next" data-i18n="d.next">Next</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit" hidden data-i18n="d.close">Close this month</button>
+        </div>
+      </form>
+
+      <div id="result" class="result" hidden tabindex="-1"></div>
     </div>
   </section>
 
-  <!-- USAGE STRIP (placeholder) -->
+  <!-- USAGE STRIP: read back from Supabase via /api/stats -->
   <section class="usage" id="usage" aria-labelledby="usage-title">
-    <div class="wrap usage-row">
-      <h2 id="usage-title" class="sr-only" data-i18n="usage.title">Usage so far</h2>
-      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.rent">rent checked with KirayaKhata</span></p>
-      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.months">months closed</span></p>
-      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.common">most common case</span></p>
-      <p class="usage-note" data-i18n="usage.note">Live numbers appear once the checker is running.</p>
+    <div class="wrap">
+      <h2 id="usage-title" class="usage-label" data-i18n="usage.label">Demo activity on this site</h2>
+      <div class="usage-row">
+        <p class="usage-item"><span class="usage-num" id="u-rent">—</span><span data-i18n="usage.rent">rent checked with KirayaKhata</span></p>
+        <p class="usage-item"><span class="usage-num" id="u-months">—</span><span data-i18n="usage.months">months closed</span></p>
+        <p class="usage-item"><span class="usage-num" id="u-caught">—</span><span data-i18n="usage.caught">in short payments and TDS gaps caught</span></p>
+        <p class="usage-item"><span class="usage-num usage-text" id="u-common">—</span><span data-i18n="usage.common">most common case</span></p>
+      </div>
     </div>
   </section>
 
@@ -305,7 +470,7 @@
       </details>
       <details>
         <summary data-i18n="faq.q8">Is my tax information safe?</summary>
-        <p data-i18n="faq.a8">The demo does not ask for your PAN, GSTIN, phone, email, address or bank details, and never for portal passwords. What we save is anonymised, such as the rent amount and property type. Names you type for a receipt stay in your browser.</p>
+        <p data-i18n="faq.a8">We never ask for your PAN, bank details or portal passwords. What our server saves is anonymised, such as the rent amount and property type. Names, GSTINs and emails you type for an invoice stay on your device and are never sent to us.</p>
       </details>
       <details>
         <summary data-i18n="faq.q9">Which tax year am I currently working on?</summary>
