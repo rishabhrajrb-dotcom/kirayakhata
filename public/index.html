@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>KirayaKhata — rent, GST and tax deadlines for landlords</title>
+<meta name="description" content="A simple rent and tax compliance assistant for Indian landlords with a few rented properties. Know what is done, what is due next and what your CA needs.">
+<meta name="theme-color" content="#8E1B1B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%238E1B1B'/%3E%3Cpath d='M9 8v16M9 16l9-8M9 16l9 8' stroke='%23E0A100' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="module" src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="wordmark" href="#top" aria-label="KirayaKhata home" data-i18n-aria="wordmarkLabel">
+      <span class="wm-latin">KirayaKhata</span>
+      <span class="wm-deva" lang="hi">किरायाखाता</span>
+    </a>
+    <nav class="header-nav" aria-label="Sections" data-i18n-aria="nav.label">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#features" data-i18n="nav.features">What it does</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">Questions</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="lang-toggle" id="lang-toggle" lang="hi" aria-label="हिंदी में देखें">हिंदी</button>
+      <a class="btn btn-primary btn-header" href="#demo">
+        <span class="cta-long" data-i18n="cta.example">Try with an example</span>
+        <span class="cta-short" data-i18n="cta.exampleShort">Try example</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 id="hero-title" data-i18n="hero.title">Rent, GST and tax deadlines — without the monthly confusion.</h1>
+        <p class="lede" data-i18n="hero.sub">Made for landlords with a few rented properties. Open one screen and see what is done, what is due next, and what your CA still needs.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#demo" data-i18n="cta.example">Try with an example</a>
+          <a class="btn btn-quiet" href="#how" data-i18n="cta.how">See how it works</a>
+        </div>
+        <p class="byline"><span class="seal" aria-hidden="true">CA</span><span data-i18n="hero.byline">Built by a Chartered Accountant.</span></p>
+      </div>
+
+      <figure class="ledger" aria-labelledby="ledger-caption">
+        <div class="ledger-binding">
+          <span class="ledger-title" data-i18n="ledger.title">Rent ledger</span>
+          <span class="ledger-tag" data-i18n="ledger.tag">Example</span>
+        </div>
+        <div class="ledger-page">
+          <table class="ledger-table">
+            <caption id="ledger-caption" class="sr-only" data-i18n="ledger.caption">Example rent ledger: three properties, July to October 2026</caption>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="ledger.property">Property</th>
+                <th scope="col" data-i18n="m.jul">Jul</th>
+                <th scope="col" data-i18n="m.aug">Aug</th>
+                <th scope="col" data-i18n="m.sep">Sep</th>
+                <th scope="col" data-i18n="m.oct">Oct</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-i18n="ledger.p1">Park Street office</th>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-action" aria-hidden="true">!</span><span class="sr-only" data-i18n="st.action">Action needed</span></td>
+                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="ledger.p2">MG Road shop</th>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="ledger.p3">Lake Road flat</th>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
+                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="ledger-legend" aria-hidden="true">
+            <li><span class="st st-paid">✓</span><span data-i18n="st.paid">Paid</span></li>
+            <li><span class="st st-pending">…</span><span data-i18n="st.pending">Pending</span></li>
+            <li><span class="st st-action">!</span><span data-i18n="st.action">Action needed</span></li>
+          </ul>
+          <div class="ledger-notes">
+            <p class="note note-action"><strong data-i18n="ledger.attnTitle">1 thing needs attention</strong><span data-i18n="ledger.attn">September rent from Park Street office is ₹8,000 short.</span></p>
+            <p class="note note-next"><strong data-i18n="ledger.nextTitle">Next</strong><span data-i18n="ledger.next">Report September 2026 rent invoices by 11 October 2026.</span></p>
+          </div>
+        </div>
+        <figcaption class="ledger-cap" data-i18n="ledger.figcap">Illustration with example properties, not real data.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem" aria-labelledby="problem-title">
+    <div class="wrap">
+      <h2 id="problem-title" data-i18n="problem.title">Sound familiar?</h2>
+      <p class="section-lede" data-i18n="problem.sub">Small landlords are rarely short of rent. They are short of time and certainty.</p>
+      <ul class="quotes">
+        <li data-i18n="problem.q1">“I pay someone every month just to make rent invoices.”</li>
+        <li data-i18n="problem.q2">“I don’t know whether I or my tenant pays the GST.”</li>
+        <li data-i18n="problem.q3">“The TDS my tenant says they deducted doesn’t always match.”</li>
+        <li data-i18n="problem.q4">“I remember tax deadlines only when my accountant calls.”</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-ruled" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title" data-i18n="how.title">How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3 data-i18n="how.s1">Add your property once.</h3>
+          <p data-i18n="how.s1d">Shop, office or flat. Who rents it. Whether you have GST. A few clicks, no forms.</p>
+        </li>
+        <li>
+          <h3 data-i18n="how.s2">Mark rent received each month.</h3>
+          <p data-i18n="how.s2d">Enter what reached your bank and the TDS your tenant says they cut. We check if it adds up.</p>
+        </li>
+        <li>
+          <h3 data-i18n="how.s3">KirayaKhata tells you what is due next.</h3>
+          <p data-i18n="how.s3d">Every reminder says what to do, for which month, and by which date.</p>
+        </li>
+        <li>
+          <h3 data-i18n="how.s4">Download your year-end CA pack.</h3>
+          <p data-i18n="how.s4d">Clean, matched records for your CA, instead of photos and handwritten notes.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE PROMISE -->
+  <section class="section" id="promise" aria-labelledby="promise-title">
+    <div class="wrap promise">
+      <div>
+        <h2 id="promise-title" data-i18n="promise.title">Fixed rules do the maths. AI only explains.</h2>
+        <p data-i18n="promise.p1">KirayaKhata calculates the numbers using fixed tax rules. AI only explains them in simple language.</p>
+        <p data-i18n="promise.p2">Every tax rule records its official source and the date a CA last checked it. When a case is unclear, we say “A CA should confirm this” instead of guessing.</p>
+      </div>
+      <ol class="flow" aria-label="How a result is produced" data-i18n-aria="promise.flowLabel">
+        <li><span data-i18n="promise.f1">Your entries</span></li>
+        <li><span data-i18n="promise.f2">Fixed tax rules calculate</span></li>
+        <li><span data-i18n="promise.f3">AI explains in plain words</span></li>
+        <li class="flow-stamp"><span data-i18n="promise.f4">Prepared — verify before filing</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-ruled" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" data-i18n="features.title">What KirayaKhata does for you</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3 data-i18n="features.g1">Every month</h3>
+          <ul>
+            <li data-i18n="features.g1a">Track rent for each property</li>
+            <li data-i18n="features.g1b">Check GST and TDS on the rent</li>
+            <li data-i18n="features.g1c">Make the rent receipt or invoice</li>
+            <li data-i18n="features.g1d">Spot short payments straight away</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3 data-i18n="features.g2">What is due next</h3>
+          <ul>
+            <li data-i18n="features.g2a">Monthly GST reminders</li>
+            <li data-i18n="features.g2b">Advance-tax reminders</li>
+            <li data-i18n="features.g2c">Year-end tax reminders</li>
+            <li data-i18n="features.g2d">Rent agreement renewal and increase dates</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3 data-i18n="features.g3">Tax time</h3>
+          <ul>
+            <li data-i18n="features.g3a">Match TDS your tenants deducted</li>
+            <li data-i18n="features.g3b">Full-year rent summary</li>
+            <li data-i18n="features.g3c">One-click pack for your CA</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3 data-i18n="features.g4">Peace of mind</h3>
+          <ul>
+            <li data-i18n="features.g4a">Reminders before every date</li>
+            <li data-i18n="features.g4b">Alerts for missing documents</li>
+            <li data-i18n="features.g4c">Clear flags when a CA should look</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE DEMO (placeholder) -->
+  <section class="section" id="demo" aria-labelledby="demo-title">
+    <div class="wrap">
+      <h2 id="demo-title" data-i18n="demo.title">Close this month’s rent</h2>
+      <div class="placeholder-panel">
+        <p class="placeholder-head" data-i18n="demo.soon">The live checker opens here in the next build.</p>
+        <p data-i18n="demo.desc">You will be able to load a ready example — a commercial shop at ₹1,00,000 a month — and close the month in one click, or enter your own details in three short steps. No login needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- USAGE STRIP (placeholder) -->
+  <section class="usage" id="usage" aria-labelledby="usage-title">
+    <div class="wrap usage-row">
+      <h2 id="usage-title" class="sr-only" data-i18n="usage.title">Usage so far</h2>
+      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.rent">rent checked with KirayaKhata</span></p>
+      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.months">months closed</span></p>
+      <p class="usage-item"><span class="usage-num">—</span><span data-i18n="usage.common">most common case</span></p>
+      <p class="usage-note" data-i18n="usage.note">Live numbers appear once the checker is running.</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <h2 id="pricing-title" data-i18n="pricing.title">Simple pricing</h2>
+      <p class="section-lede" data-i18n="pricing.sub">Indicative prices. The demo on this page is free.</p>
+      <div class="price-grid">
+        <div class="price">
+          <h3 data-i18n="pricing.t1">Starter</h3>
+          <p class="price-amt" data-i18n="pricing.t1p">Free</p>
+          <p data-i18n="pricing.t1d">1 property</p>
+        </div>
+        <div class="price price-main">
+          <h3 data-i18n="pricing.t2">Family</h3>
+          <p class="price-amt"><span>₹2,499</span><small data-i18n="pricing.perYear">/year</small></p>
+          <p data-i18n="pricing.t2d">Up to 5 properties</p>
+        </div>
+        <div class="price">
+          <h3 data-i18n="pricing.t3">With a CA</h3>
+          <p class="price-amt" data-i18n="pricing.t3p">Optional add-on</p>
+          <p data-i18n="pricing.t3d">CA review and filing help, priced separately</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER NOTE -->
+  <section class="section section-ruled" id="founder" aria-labelledby="founder-title">
+    <div class="wrap founder">
+      <h2 id="founder-title" data-i18n="founder.title">Why I built this</h2>
+      <blockquote>
+        <p data-i18n="founder.p1">My father rents out a few properties. Every month he depends on an accountant to make invoices, and on me to remember GST dates and check TDS. He doesn’t need a tax course. He needs one screen that tells him whether he is okay and what to do next.</p>
+        <p data-i18n="founder.p2">I’m a Chartered Accountant and CFA, now at ISB. KirayaKhata is the tool I wanted to give him.</p>
+        <footer>— Rishabh, CA, CFA</footer>
+      </blockquote>
+      <!-- PLACEHOLDER: Replace the block below with the LinkedIn launch copy. -->
+      <div class="placeholder-panel placeholder-dashed" data-placeholder="linkedin-launch-copy">
+        <p class="placeholder-head" data-i18n="founder.ph">[Placeholder] LinkedIn launch note goes here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <h2 id="faq-title" data-i18n="faq.title">Questions landlords ask</h2>
+      <details>
+        <summary data-i18n="faq.q1">Do I still need a CA?</summary>
+        <p data-i18n="faq.a1">Yes, for review and filing. KirayaKhata does the routine monthly work — receipts, checking rent and TDS, tracking dates — so your CA gets clean numbers and spends time only where professional judgement is needed.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q2">Does KirayaKhata file GST returns?</summary>
+        <p data-i18n="faq.a2">Not today. It prepares the numbers and tells you what to report and by when. You or your CA file on the GST portal. We never ask for your GST portal password.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q3">Does KirayaKhata file my income-tax return?</summary>
+        <p data-i18n="faq.a3">Not today. It keeps a full-year record of rent and TDS and prepares a pack for your CA. Filing stays with you or your CA.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q4">What happens if I miss a deadline?</summary>
+        <p data-i18n="faq.a4">The item moves to the top of your screen as overdue, with the next step. Late filing or payment can lead to late fees or interest, so speak to your CA promptly. We will not guess the penalty for you.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q5">How does it know what is due next?</summary>
+        <p data-i18n="faq.a5">It uses a fixed calendar of tax dates, your GST status, whether you file monthly or quarterly, and the rent you have marked. Every reminder says which month or year it is for. Each date rule records its official source and when a CA last checked it.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q6">What is TDS?</summary>
+        <p data-i18n="faq.a6">Tax deducted at source. Some tenants, such as companies and many businesses, must keep back part of the rent as tax and deposit it with the government in your name. You get credit for it in your tax return, so it matters that the amount matches.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q7">Residential or commercial — does it matter?</summary>
+        <p data-i18n="faq.a7">Yes. GST treats a house rented to someone who lives in it differently from a shop, office or warehouse, and the answer can change if the tenant is GST-registered or uses the home for business. KirayaKhata asks simple questions and, where the facts are unclear, says a CA should confirm.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q8">Is my tax information safe?</summary>
+        <p data-i18n="faq.a8">The demo does not ask for your PAN, GSTIN, phone, email, address or bank details, and never for portal passwords. What we save is anonymised, such as the rent amount and property type. Names you type for a receipt stay in your browser.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q9">Which tax year am I currently working on?</summary>
+        <p data-i18n="faq.a9">Indian tax years run from 1 April to 31 March. You don’t need to remember which one is current: KirayaKhata works it out from the date of each rent payment and labels it plainly, for example “Rent earned Apr 2026–Mar 2027”.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">Prepared for review. Tax treatment may depend on individual facts.</p>
+    <p class="footer-small" data-i18n="footer.noFiling">KirayaKhata does not file returns or make payments on your behalf.</p>
+    <p class="footer-links">
+      <!-- PLACEHOLDER: set the public GitHub repository URL. -->
+      <a href="#" data-placeholder="github-url" data-i18n="footer.github">Source code on GitHub</a>
+      <span aria-hidden="true">·</span>
+      <span>© 2026 KirayaKhata</span>
+    </p>
+  </div>
+</footer>
+</body>
+</html>
