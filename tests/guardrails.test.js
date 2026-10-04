@@ -205,3 +205,10 @@ test("callGemini sends the guarded config and reads token usage", async () => {
   assert.equal((await callGemini("{}", { client: failing })).errorCode, "HTTP_429");
   assert.equal((await callGemini("{}", { apiKey: "" })).errorCode, "NO_API_KEY");
 });
+
+test("Supabase URL accepts the dashboard's /rest/v1/ form", async () => {
+  const { normaliseSupabaseUrl } = await import("../lib/supabase.js");
+  assert.equal(normaliseSupabaseUrl("https://abc.supabase.co/rest/v1/"), "https://abc.supabase.co");
+  assert.equal(normaliseSupabaseUrl("https://abc.supabase.co/"), "https://abc.supabase.co");
+  assert.equal(normaliseSupabaseUrl(" https://abc.supabase.co "), "https://abc.supabase.co");
+});
