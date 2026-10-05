@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" fill="none" role="img" aria-label="Row of small Indian shops and a home">
+  <defs><linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0A100" stop-opacity=".9"/><stop offset="1" stop-color="#E0A100" stop-opacity=".35"/></linearGradient></defs>
+  <g stroke="#B9AEEA" stroke-opacity=".55" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- shop 1 -->
+    <rect x="60" y="120" width="150" height="120"/>
+    <path d="M52 120 h166 l-14 -26 h-138 z"/>
+    <path d="M70 94 v-18 M200 94 v-18"/>
+    <rect x="86" y="150" width="46" height="58" fill="url(#win)" fill-opacity=".18"/>
+    <rect x="150" y="150" width="40" height="34" fill="url(#win)" fill-opacity=".18"/>
+    <path d="M60 120 l10 14 h130 l10 -14" stroke="#E0A100" stroke-opacity=".7"/>
+    <!-- shop 2 (taller) -->
+    <rect x="240" y="80" width="170" height="160"/>
+    <rect x="262" y="104" width="54" height="40" fill="url(#win)" fill-opacity=".2"/>
+    <rect x="332" y="104" width="54" height="40" fill="url(#win)" fill-opacity=".2"/>
+    <rect x="300" y="172" width="54" height="68"/>
+    <path d="M240 80 h170 M240 150 h170"/>
+    <!-- home with pitched roof -->
+    <rect x="450" y="130" width="150" height="110"/>
+    <path d="M440 130 l85 -56 l85 56 z" stroke="#E0A100" stroke-opacity=".7"/>
+    <rect x="474" y="158" width="44" height="40" fill="url(#win)" fill-opacity=".2"/>
+    <rect x="540" y="168" width="40" height="72"/>
+    <circle cx="525" cy="104" r="4" fill="#E0A100" stroke="none"/>
+    <!-- shop 3 with awning -->
+    <rect x="640" y="110" width="160" height="130"/>
+    <path d="M632 150 h176 l-18 24 h-140 z" stroke="#8E1B1B" stroke-opacity=".6"/>
+    <rect x="662" y="176" width="48" height="64"/>
+    <rect x="726" y="176" width="54" height="40" fill="url(#win)" fill-opacity=".2"/>
+    <!-- tall block -->
+    <rect x="830" y="70" width="140" height="170"/>
+    <g>
+      <rect x="852" y="92" width="32" height="26" fill="url(#win)" fill-opacity=".18"/><rect x="900" y="92" width="32" height="26" fill="url(#win)" fill-opacity=".18"/>
+      <rect x="852" y="134" width="32" height="26"/><rect x="900" y="134" width="32" height="26" fill="url(#win)" fill-opacity=".18"/>
+      <rect x="852" y="176" width="32" height="26" fill="url(#win)" fill-opacity=".18"/><rect x="900" y="176" width="32" height="26"/>
+    </g>
+    <!-- shop 4 -->
+    <rect x="1000" y="124" width="150" height="116"/>
+    <path d="M992 124 h166 l-12 -22 h-142 z" stroke="#E0A100" stroke-opacity=".7"/>
+    <rect x="1024" y="156" width="50" height="60" fill="url(#win)" fill-opacity=".18"/>
+    <rect x="1090" y="156" width="44" height="36"/>
+    <!-- ground -->
+    <path d="M20 240 h1160" stroke-opacity=".8"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 320" fill="none" role="img" aria-label="Organised folders and a ledger ready for review">
+  <g stroke="#1E2433" stroke-opacity=".8" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="70" y="150" width="300" height="130" rx="8" fill="#F3EFE2"/>
+    <path d="M70 150 l0 -26 l90 0 l18 24" fill="#E0A100" fill-opacity=".25"/>
+    <rect x="96" y="120" width="260" height="120" rx="8" fill="#FBF8EF"/>
+    <path d="M96 120 l0 -24 l84 0 l16 22" fill="#8E1B1B" fill-opacity=".2"/>
+    <!-- ledger standing -->
+    <rect x="150" y="60" width="150" height="150" rx="6" transform="rotate(-6 225 135)" fill="#8E1B1B" fill-opacity=".9" stroke="#8E1B1B"/>
+    <path d="M166 92 h120 M166 112 h120 M166 132 h96" transform="rotate(-6 225 135)" stroke="#FBF8EF" stroke-opacity=".8"/>
+    <path d="M300 70 l8 150" transform="rotate(-6 225 135)" stroke="#E0A100"/>
+    <!-- check marks on folders -->
+    <path d="M120 210 l12 12 l22 -26" stroke="#1F7A4D" stroke-width="3"/>
+    <circle cx="330" cy="100" r="5" fill="#E0A100" stroke="none"/>
+  </g>
+</svg>

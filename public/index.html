@@ -93,12 +93,15 @@
         </div>
       </div>
     </div>
+    <figure class="hero-skyline" aria-hidden="true"><img src="/assets/skyline.svg" alt="" width="1200" height="260"></figure>
   </section>
 
   <!-- ================= 01 / MONTHLY ROUTINE ================= -->
   <section class="sec-dark" id="how" aria-labelledby="routine-title">
     <div class="wrap">
       <p class="sec-num"><span>01</span> <span data-i18n="sec.routine">The monthly routine</span></p>
+      <div class="routine-grid">
+        <div class="routine-main">
       <div class="routine-head">
         <h2 class="display" id="routine-title">
           <span data-i18n="routine.t1">A few properties.</span>
@@ -114,6 +117,9 @@
         <li><span class="flow6-n">5</span><span data-i18n="routine.s5">See next deadline</span></li>
         <li><span class="flow6-n">6</span><span data-i18n="routine.s6">Prepare year-end records</span></li>
       </ol>
+        </div>
+        <figure class="illus illus-desk reveal-illus"><img src="/assets/desk.svg" alt="An open rent ledger with papers, a key and a calendar" width="340" height="278" loading="lazy"></figure>
+      </div>
     </div>
   </section>
 
@@ -217,6 +223,15 @@
             <div class="q"><label class="q-label" for="s-charges" data-i18n="studio.charges">Other charges (Rs.)</label><input class="input input-money" id="s-charges" data-sf="charges" inputmode="numeric" value="0"></div>
           </div>
 
+          <div class="q studio-logo">
+            <span class="q-label" data-i18n="studio.logo">Firm logo (optional)</span>
+            <div class="logo-row">
+              <label class="btn btn-quiet btn-file"><input type="file" id="s-logo" accept="image/png,image/jpeg" hidden><span data-i18n="studio.logoAdd">Add logo</span></label>
+              <img id="s-logo-preview" class="logo-prev" alt="" hidden>
+              <button type="button" class="link-btn" id="s-logo-remove" hidden data-i18n="studio.logoRemove">Remove</button>
+            </div>
+            <p class="q-hint" data-i18n="studio.logoNote">PNG or JPG. Stays on your device — never uploaded to our server.</p>
+          </div>
           <fieldset class="studio-gst">
             <legend data-i18n="studio.gstQ">GST treatment</legend>
             <label class="tpl-opt"><input type="radio" name="sgst" value="fcm" checked><span data-i18n="studio.gstFcm">I collect 18% GST (registered, commercial)</span></label>
@@ -459,6 +474,7 @@
         <span class="accent" data-i18n="yend.t2">already organised.</span>
       </h2>
       <p class="sec-lede sec-lede-dark" data-i18n="yend.sub">At year-end, your records are gathered in one place for review. This prepares records for your CA — it does not file your return or replace professional advice.</p>
+      <figure class="illus illus-folders reveal-illus"><img src="/assets/folders.svg" alt="Organised folders and a ledger ready for review" width="300" height="218" loading="lazy"></figure>
       <div class="yend-grid">
         <div class="yend-card"><span class="yend-ic" aria-hidden="true">📒</span><b data-i18n="yend.i1">Annual rent ledger</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
         <div class="yend-card"><span class="yend-ic" aria-hidden="true">🧾</span><b data-i18n="yend.i2">Invoice & receipt index</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 360" fill="none" role="img" aria-label="An open rent ledger with papers, a key and a calendar">
+  <g stroke="#C4BAF0" stroke-opacity=".6" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- back paper -->
+    <rect x="250" y="40" width="150" height="190" rx="4" transform="rotate(7 325 135)" fill="#1C1540"/>
+    <g stroke-opacity=".35"><path d="M270 80 h110 M270 104 h110 M270 128 h90 M270 152 h110" transform="rotate(7 325 135)"/></g>
+    <!-- calendar -->
+    <rect x="40" y="36" width="130" height="118" rx="8" fill="#1C1540"/>
+    <path d="M40 66 h130" stroke="#E0A100" stroke-opacity=".8"/>
+    <path d="M66 36 v-14 M144 36 v-14"/>
+    <g stroke-opacity=".4"><path d="M64 86 h82 M64 108 h82 M64 130 h82 M86 78 v70 M112 78 v70"/></g>
+    <circle cx="128" cy="122" r="12" stroke="#8E1B1B" stroke-opacity=".8"/>
+    <!-- open ledger -->
+    <path d="M70 300 C 150 270 290 270 370 300 L 370 318 C 290 288 150 288 70 318 Z" fill="#8E1B1B" fill-opacity=".25"/>
+    <path d="M220 284 v34"/>
+    <g stroke-opacity=".45">
+      <path d="M96 296 h92 M96 306 h92"/>
+      <path d="M252 296 h92 M252 306 h92"/>
+    </g>
+    <!-- key -->
+    <circle cx="210" cy="196" r="20" stroke="#E0A100" stroke-opacity=".85"/>
+    <path d="M226 206 l64 48 M276 240 l-12 10 M290 250 l-12 10" stroke="#E0A100" stroke-opacity=".85"/>
+    <!-- coin / rupee -->
+    <circle cx="330" cy="150" r="22" stroke="#E0A100" stroke-opacity=".7"/>
+    <path d="M322 142 h16 M322 150 h16 M334 142 c6 0 6 10 0 10 h-6 l10 10" stroke="#E0A100" stroke-opacity=".7" stroke-width="2"/>
+  </g>
+</svg>

@@ -20,6 +20,17 @@ const MONTHS = ["January", "February", "March", "April", "May", "June", "July", 
 const monthName = (m) => tr(`mon.${Number(m)}`);
 const dateLabel = (d) => `${Number(d.slice(8, 10))} ${monthName(d.slice(5, 7))} ${d.slice(0, 4)}`;
 
+// ---------- studio logo (kept on this device only) ----------
+const LOGO_KEY = "kk.studioLogo";
+let studioLogo = (() => { try { return localStorage.getItem(LOGO_KEY) || null; } catch { return null; } })();
+function setLogo(dataUrl) {
+  studioLogo = dataUrl || null;
+  try { if (studioLogo) localStorage.setItem(LOGO_KEY, studioLogo); else localStorage.removeItem(LOGO_KEY); } catch { /* quota/blocked: keep in memory */ }
+  const prev = $("#s-logo-preview"), rm = $("#s-logo-remove");
+  if (prev) { prev.src = studioLogo || ""; prev.hidden = !studioLogo; }
+  if (rm) rm.hidden = !studioLogo;
+}
+
 // ---------- mobile nav ----------
 function initNav() {
   const btn = $("#navToggle"), nav = $("#primaryNav");
@@ -94,6 +105,7 @@ function studioData() {
     landlordName: f("landlordName"), tenantName: f("tenantName"), propertyLabel: f("propertyLabel"),
     period: f("period") || "—", dateLabel: dateLabel(todayIST()),
     rcm: treatment === "rcm",
+    logo: studioLogo || null,
     footerMeta: `DRAFT / DEMO · ${docType}`,
   };
 }
@@ -109,6 +121,7 @@ function renderStudioPreview() {
   sheet.className = `invoice-sheet tpl-${d.template}`;
   sheet.innerHTML = `
     <div class="inv-wm" aria-hidden="true">DRAFT / DEMO</div>
+    ${d.logo ? `<img class="inv-logo" src="${esc(d.logo)}" alt="">` : ""}
     <div class="inv-head inv-head-${d.template}">
       ${d.template === "letterhead" ? `<p class="inv-lh-name">${esc(d.landlordName || "Landlord")}</p><p class="inv-lh-sub">${esc(d.propertyLabel || "")}</p>` : ""}
       <div class="inv-title-row">
@@ -160,6 +173,19 @@ function initStudio() {
     finally { b.disabled = false; }
   });
   $("#s-email")?.addEventListener("click", studioEmail);
+  const logoInput = $("#s-logo");
+  if (logoInput) {
+    logoInput.addEventListener("change", () => {
+      const file = logoInput.files && logoInput.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) { alert(tr("studio.logoNote")); logoInput.value = ""; return; }
+      const reader = new FileReader();
+      reader.onload = () => { setLogo(String(reader.result)); renderStudioPreview(); };
+      reader.readAsDataURL(file);
+    });
+    $("#s-logo-remove")?.addEventListener("click", () => { setLogo(null); logoInput.value = ""; renderStudioPreview(); });
+    if (studioLogo) setLogo(studioLogo);
+  }
   rerender();
 }
 
@@ -220,6 +246,21 @@ function initCalendar() {
   $("#cal-ics")?.addEventListener("click", downloadCalIcs);
 }
 
+// ---------- scroll reveals ----------
+function initReveal() {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const sel = ".sec-dark .display, .sec-paper .display, .sec-lede, .flow6 li, .row-item, .studio-controls, .studio-preview, .cal-row, .cal-side, .yend-card, .faq-sec details, .illus, .closing-inner";
+  const els = $$(sel);
+  if (reduce || !("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("rv-in")); return; }
+  const groups = new Map();
+  for (const el of els) { el.classList.add("rv"); const k = el.parentElement; const arr = groups.get(k) || []; arr.push(el); groups.set(k, arr); }
+  for (const arr of groups.values()) arr.forEach((el, i) => { el.style.transitionDelay = `${Math.min(i * 70, 420)}ms`; });
+  const io = new IntersectionObserver((ents) => {
+    for (const e of ents) if (e.isIntersecting) { e.target.classList.add("rv-in"); io.unobserve(e.target); }
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  els.forEach((e) => io.observe(e));
+}
+
 // ---------- boot ----------
 function boot() {
   initNav();
@@ -227,6 +268,7 @@ function boot() {
   initOwnShortcuts();
   initStudio();
   initCalendar();
+  initReveal();
   document.addEventListener("kk:lang", () => { renderStudioPreview(); renderCalendar(); });
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

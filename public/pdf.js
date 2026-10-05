@@ -170,8 +170,7 @@ function invFooter(doc, W, data) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(74, 81, 99);
-  doc.text("Prepared with KirayaKhata — verify before filing.", W / 2, 282, { align: "center" });
-  doc.text(data.footerMeta || "DRAFT / DEMO — not a valid tax document", W / 2, 287, { align: "center" });
+  doc.text("Prepared with KirayaKhata — verify before filing.", W / 2, 284, { align: "center" });
 }
 
 function lineItems(doc, data, W, M, y, accent) {
@@ -211,24 +210,42 @@ function partyBlock(doc, M, W, y, data) {
   return Math.max(a, b) + 10;
 }
 
+// Fit a logo data URL into a max box (mm), preserving aspect ratio.
+function logoBox(doc, dataUrl, maxW, maxH) {
+  try {
+    const p = doc.getImageProperties(dataUrl);
+    const ratio = Math.min(maxW / p.width, maxH / p.height);
+    return { w: p.width * ratio, h: p.height * ratio };
+  } catch { return null; }
+}
+function logoFormat(dataUrl) {
+  const m = (dataUrl || "").match(/^data:image\/([a-z]+)/i);
+  const f = (m ? m[1] : "png").toUpperCase();
+  return f === "JPG" ? "JPEG" : f;
+}
+
 export async function downloadInvoicePdf(template, data) {
   const JsPDF = await loadJsPdf();
   const doc = new JsPDF({ unit: "mm", format: "a4" });
   const W = 210, M = 18;
   const number = invHeaderNumber(data.period);
   watermark(doc, W);
+  const logo = data.logo ? logoBox(doc, data.logo, 46, 16) : null;
+  const fmt = data.logo ? logoFormat(data.logo) : null;
   let y = 22;
 
   if (template === "minimal") {
+    if (logo) doc.addImage(data.logo, fmt, M, 13, logo.w, logo.h);
     doc.setFont("helvetica", "bold"); doc.setTextColor(30, 36, 51); doc.setFontSize(22);
     doc.text(data.title.toUpperCase(), W - M, y, { align: "right" });
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(142, 27, 27);
     doc.text("DRAFT / DEMO", W - M, (y += 6), { align: "right" });
-    doc.setDrawColor(30, 36, 51); doc.setLineWidth(0.4); doc.line(M, (y += 6), W - M, y);
-    doc.setLineWidth(0.2);
+    y = Math.max(y, logo ? 13 + logo.h : y);
+    doc.setDrawColor(30, 36, 51); doc.setLineWidth(0.4); doc.line(M, (y += 6), W - M, y); doc.setLineWidth(0.2);
   } else if (template === "letterhead") {
+    if (logo) { doc.addImage(data.logo, fmt, (W - logo.w) / 2, y, logo.w, logo.h); y += logo.h + 4; }
     doc.setFont("helvetica", "bold"); doc.setFontSize(16); doc.setTextColor(30, 36, 51);
-    doc.text(data.landlordName || "Landlord", W / 2, y, { align: "center" });
+    doc.text(data.landlordName || "Landlord", W / 2, (y += 2), { align: "center" });
     doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(74, 81, 99);
     doc.text(data.propertyLabel || "", W / 2, (y += 5.5), { align: "center" });
     doc.setDrawColor(224, 161, 0); doc.setLineWidth(0.8); doc.line(M, (y += 4), W - M, y); doc.setLineWidth(0.2);
@@ -237,10 +254,13 @@ export async function downloadInvoicePdf(template, data) {
   } else { // classic ledger
     doc.setFillColor(142, 27, 27); doc.rect(0, 0, W, 9, "F");
     doc.setFillColor(224, 161, 0); doc.rect(0, 9, W, 1.6, "F");
+    const titleY = logo ? 15 + logo.h + 5 : (y += 6);
+    if (logo) doc.addImage(data.logo, fmt, M, 15, logo.w, logo.h);
     doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(30, 36, 51);
-    doc.text(data.title.toUpperCase(), M, (y += 6));
+    doc.text(data.title.toUpperCase(), M, titleY);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(142, 27, 27);
-    doc.text("DRAFT / DEMO — not a valid tax document", W - M, y, { align: "right" });
+    doc.text("DRAFT / DEMO — not a valid tax document", W - M, logo ? 18 : titleY, { align: "right" });
+    y = titleY;
   }
 
   doc.setFont("helvetica", "normal"); doc.setTextColor(30, 36, 51); doc.setFontSize(10);

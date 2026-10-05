@@ -719,3 +719,28 @@ html[lang="hi"] .display .accent{ font-style:normal; color:var(--rose); }
 .inv-lines .hc-line{ font-size:.92rem; }
 .inv-note{ font-size:.8rem; color:#555; margin:8px 0 0; }
 .inv-foot{ margin-top:16px; padding-top:10px; border-top:1px dashed var(--rule); font-size:.78rem; color:#777; text-align:center; }
+
+/* ===== illustrations, logo upload, scroll reveals ===== */
+.hero-skyline{ position:absolute; left:0; right:0; bottom:0; margin:0; z-index:0; pointer-events:none; opacity:.55; line-height:0; }
+.hero-skyline img{ width:100%; height:auto; display:block; }
+@media(max-width:700px){ .hero-skyline{ opacity:.38; } }
+
+.illus{ margin:0; }
+.illus img{ width:100%; height:auto; display:block; }
+.routine-grid{ display:grid; gap:28px; align-items:center; }
+.illus-desk{ max-width:340px; margin:4px auto 0; }
+@media(min-width:960px){ .routine-grid{ grid-template-columns:1.5fr .85fr; gap:48px; } .illus-desk{ margin:0; } }
+.illus-folders{ max-width:280px; margin:0 auto 14px; }
+@media(min-width:760px){ .illus-folders{ float:right; margin:0 0 10px 28px; } }
+
+.studio-logo{ margin:0 0 18px; }
+.logo-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.btn-file{ cursor:pointer; min-height:44px; }
+.logo-prev{ max-height:46px; max-width:130px; border:1px solid var(--rule); border-radius:8px; background:#fff; padding:5px; object-fit:contain; }
+.inv-logo{ max-height:46px; max-width:150px; object-fit:contain; margin:0 0 8px; }
+.tpl-letterhead .inv-logo{ display:block; margin:0 auto 6px; }
+.tpl-minimal .inv-logo{ margin-bottom:10px; }
+
+.rv{ opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform; }
+.rv-in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce){ .rv{ opacity:1; transform:none; transition:none; } }
