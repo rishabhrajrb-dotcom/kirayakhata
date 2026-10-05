@@ -3,216 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>KirayaKhata — rent, GST and tax deadlines for landlords</title>
-<meta name="description" content="A simple rent and tax compliance assistant for Indian landlords with a few rented properties. Know what is done, what is due next and what your CA needs.">
-<meta name="theme-color" content="#8E1B1B">
+<title>KirayaKhata — rent, invoices, GST and tax deadlines for small landlords</title>
+<meta name="description" content="Prepare rent invoices, check GST and TDS, match payments, and see what needs your attention next. Made for small Indian landlords. English and Hindi.">
+<meta name="theme-color" content="#0E0A1C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%238E1B1B'/%3E%3Cpath d='M9 8v16M9 16l9-8M9 16l9 8' stroke='%23E0A100' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Mukta:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <script type="module" src="/app.js"></script>
+<script type="module" src="/landing.js"></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to main content</a>
 
-<header class="site-header">
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
   <div class="wrap header-row">
     <a class="wordmark" href="#top" aria-label="KirayaKhata home" data-i18n-aria="wordmarkLabel">
-      <span class="wm-latin">KirayaKhata</span>
-      <span class="wm-deva" lang="hi">किरायाखाता</span>
+      <span class="wm-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28"><rect width="32" height="32" rx="8" fill="#8E1B1B"/><path d="M10 8v16M10 16l9-8M10 16l9 8" stroke="#E0A100" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <span class="wm-text"><span class="wm-latin">KirayaKhata</span><span class="wm-deva" lang="hi">किरायाखाता</span></span>
     </a>
-    <nav class="header-nav" aria-label="Sections" data-i18n-aria="nav.label">
+    <nav class="header-nav" id="primaryNav" aria-label="Sections" data-i18n-aria="nav.label">
       <a href="#how" data-i18n="nav.how">How it works</a>
-      <a href="#features" data-i18n="nav.features">What it does</a>
-      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
-      <a href="#faq" data-i18n="nav.faq">Questions</a>
+      <a href="#invoices" data-i18n="nav.invoices">Invoices</a>
+      <a href="#calendar" data-i18n="nav.calendar">Tax calendar</a>
+      <a href="#faq" data-i18n="nav.faq">FAQs</a>
     </nav>
     <div class="header-actions">
       <button type="button" class="lang-toggle" id="lang-toggle" lang="hi" aria-label="हिंदी में देखें">हिंदी</button>
-      <a class="btn btn-primary btn-header" href="#demo">
-        <span class="cta-long" data-i18n="cta.example">Try with an example</span>
-        <span class="cta-short" data-i18n="cta.exampleShort">Try example</span>
-      </a>
+      <a class="btn btn-pill btn-primary btn-header" href="#demo" data-i18n="cta.check">Check this month's rent</a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu" data-i18n-aria="nav.menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1 id="hero-title" data-i18n="hero.title">Rent, GST and tax deadlines — without the monthly confusion.</h1>
-        <p class="lede" data-i18n="hero.sub">Made for landlords with a few rented properties. Open one screen and see what is done, what is due next, and what your CA still needs.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="#demo" data-i18n="cta.example">Try with an example</a>
-          <a class="btn btn-quiet" href="#how" data-i18n="cta.how">See how it works</a>
+  <!-- ================= HERO ================= -->
+  <section class="hero2" id="top" aria-labelledby="hero-title">
+    <div class="glow glow-rose" aria-hidden="true"></div>
+    <div class="glow glow-violet" aria-hidden="true"></div>
+    <div class="wrap hero2-grid">
+      <div class="hero2-copy reveal">
+        <p class="eyebrow" data-i18n="hero.eyebrow">For India's small landlords</p>
+        <h1 id="hero-title" class="display">
+          <span data-i18n="hero.l1">Your rent. Your records.</span>
+          <span class="accent" data-i18n="hero.l2">A little less work.</span>
+        </h1>
+        <p class="hero2-sub" data-i18n="hero.sub">Prepare rent invoices, check GST and TDS, match payments, and see what needs your attention next.</p>
+        <div class="hero2-ctas">
+          <a class="btn btn-pill btn-primary" href="#demo" data-i18n="cta.tryExample">Try a ready example</a>
+          <button type="button" class="btn btn-pill btn-ghost" id="hero-own" data-i18n="cta.ownDetails">Enter my own details</button>
         </div>
-        <p class="byline"><span class="seal" aria-hidden="true">CA</span><span data-i18n="hero.byline">Built by a Chartered Accountant.</span></p>
+        <p class="hero2-quiet" data-i18n="hero.quiet">No login needed for the demo · English and Hindi</p>
       </div>
 
-      <figure class="ledger" aria-labelledby="ledger-caption">
-        <div class="ledger-binding">
-          <span class="ledger-title" data-i18n="ledger.title">Rent ledger</span>
-          <span class="ledger-tag" data-i18n="ledger.tag">Example</span>
+      <!-- Hero product composition: HTML/SVG, readable, from demo data -->
+      <div class="hero2-visual reveal" aria-labelledby="hero-visual-cap">
+        <p id="hero-visual-cap" class="float-tag" data-i18n="hero.illus">Illustrative example</p>
+
+        <div class="paper-card hc-invoice" role="img" aria-label="Example rent invoice for September 2026">
+          <div class="hc-inv-top">
+            <span class="hc-inv-title" data-i18n="hero.invTitle">Tax invoice</span>
+            <span class="hc-inv-badge" data-i18n="hero.draft">DRAFT</span>
+          </div>
+          <p class="hc-inv-sub"><span data-i18n="hero.invFor">Rent · September 2026</span></p>
+          <div class="hc-line"><span data-i18n="hero.rent">Rent</span><b>Rs. 1,00,000</b></div>
+          <div class="hc-line"><span data-i18n="hero.gst">GST (18%)</span><b>+ Rs. 18,000</b></div>
+          <div class="hc-line hc-total"><span data-i18n="hero.invTotal">Invoice total</span><b>Rs. 1,18,000</b></div>
         </div>
-        <div class="ledger-page">
-          <table class="ledger-table">
-            <caption id="ledger-caption" class="sr-only" data-i18n="ledger.caption">Example rent ledger: three properties, July to October 2026</caption>
-            <thead>
-              <tr>
-                <th scope="col" data-i18n="ledger.property">Property</th>
-                <th scope="col" data-i18n="m.jul">Jul</th>
-                <th scope="col" data-i18n="m.aug">Aug</th>
-                <th scope="col" data-i18n="m.sep">Sep</th>
-                <th scope="col" data-i18n="m.oct">Oct</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" data-i18n="ledger.p1">Park Street office</th>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-action" aria-hidden="true">!</span><span class="sr-only" data-i18n="st.action">Action needed</span></td>
-                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
-              </tr>
-              <tr>
-                <th scope="row" data-i18n="ledger.p2">MG Road shop</th>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
-              </tr>
-              <tr>
-                <th scope="row" data-i18n="ledger.p3">Lake Road flat</th>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-paid" aria-hidden="true">✓</span><span class="sr-only" data-i18n="st.paid">Paid</span></td>
-                <td><span class="st st-pending" aria-hidden="true">…</span><span class="sr-only" data-i18n="st.pending">Pending</span></td>
-              </tr>
-            </tbody>
-          </table>
-          <ul class="ledger-legend" aria-hidden="true">
-            <li><span class="st st-paid">✓</span><span data-i18n="st.paid">Paid</span></li>
-            <li><span class="st st-pending">…</span><span data-i18n="st.pending">Pending</span></li>
-            <li><span class="st st-action">!</span><span data-i18n="st.action">Action needed</span></li>
-          </ul>
-          <div class="ledger-notes">
-            <p class="note note-action"><strong data-i18n="ledger.attnTitle">1 thing needs attention</strong><span data-i18n="ledger.attn">September rent from Park Street office is ₹8,000 short.</span></p>
-            <p class="note note-next"><strong data-i18n="ledger.nextTitle">Next</strong><span data-i18n="ledger.next">Report September 2026 rent invoices by 11 October 2026.</span></p>
+
+        <div class="paper-card hc-breakdown">
+          <p class="hc-bd-title" data-i18n="hero.bdTitle">Payment check</p>
+          <div class="hc-line"><span data-i18n="hero.invTotal">Invoice total</span><b>Rs. 1,18,000</b></div>
+          <div class="hc-line"><span data-i18n="hero.tds">− TDS reported (10%)</span><b>Rs. 10,000</b></div>
+          <div class="hc-line hc-total"><span data-i18n="hero.expBank">Expected in bank</span><b>Rs. 1,08,000</b></div>
+          <div class="hc-match"><span class="tick" aria-hidden="true">✓</span><span data-i18n="hero.match">Amounts match</span></div>
+          <p class="hc-note" data-i18n="hero.treat">Forward charge (landlord collects GST). Tax treatment: verify before filing.</p>
+        </div>
+
+        <div class="float-chip hc-task">
+          <span class="chip-date">11 Oct</span>
+          <span data-i18n="hero.task">Report September rent invoice (GSTR-1)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 01 / MONTHLY ROUTINE ================= -->
+  <section class="sec-dark" id="how" aria-labelledby="routine-title">
+    <div class="wrap">
+      <p class="sec-num"><span>01</span> <span data-i18n="sec.routine">The monthly routine</span></p>
+      <div class="routine-head">
+        <h2 class="display" id="routine-title">
+          <span data-i18n="routine.t1">A few properties.</span>
+          <span class="accent" data-i18n="routine.t2">Too much paperwork.</span>
+        </h2>
+        <p class="sec-lede" data-i18n="routine.sub">Every month: make the invoice, send it, check what reached the bank against rent plus GST minus TDS, and remember the next deadline. KirayaKhata turns that into one simple flow.</p>
+      </div>
+      <ol class="flow6" aria-label="The monthly flow">
+        <li><span class="flow6-n">1</span><span data-i18n="routine.s1">Add agreement</span></li>
+        <li><span class="flow6-n">2</span><span data-i18n="routine.s2">Prepare invoice</span></li>
+        <li><span class="flow6-n">3</span><span data-i18n="routine.s3">Share with tenant</span></li>
+        <li><span class="flow6-n">4</span><span data-i18n="routine.s4">Match payment</span></li>
+        <li><span class="flow6-n">5</span><span data-i18n="routine.s5">See next deadline</span></li>
+        <li><span class="flow6-n">6</span><span data-i18n="routine.s6">Prepare year-end records</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 02 / FEATURE SERVICE ROWS ================= -->
+  <section class="sec-dark sec-rows" id="features" aria-labelledby="rows-title">
+    <div class="wrap">
+      <p class="sec-num"><span>02</span> <span data-i18n="sec.workflow">Everything in one rent workflow</span></p>
+      <h2 class="display" id="rows-title">
+        <span data-i18n="rows.t1">One place for</span>
+        <span class="accent" data-i18n="rows.t2">the whole month.</span>
+      </h2>
+
+      <div class="rows" id="featureRows">
+        <div class="row-item is-open" data-row="invoices">
+          <button type="button" class="row-head" aria-expanded="true" aria-controls="rowp-invoices">
+            <span class="row-title" data-i18n="row.inv">Invoices that look professional</span>
+            <span class="row-badge badge-demo" data-i18n="badge.demo">Available in this demo</span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row-preview" id="rowp-invoices" role="region">
+            <p data-i18n="row.invP">Agreement details, three templates, a live preview and a draft PDF download. Marked DRAFT / DEMO; verify before filing.</p>
+            <a class="row-link" href="#invoices" data-i18n="row.invL">Open the invoice studio →</a>
           </div>
         </div>
-        <figcaption class="ledger-cap" data-i18n="ledger.figcap">Illustration with example properties, not real data.</figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <!-- PROBLEM -->
-  <section class="section" id="problem" aria-labelledby="problem-title">
-    <div class="wrap">
-      <h2 id="problem-title" data-i18n="problem.title">Sound familiar?</h2>
-      <p class="section-lede" data-i18n="problem.sub">Small landlords are rarely short of rent. They are short of time and certainty.</p>
-      <ul class="quotes">
-        <li data-i18n="problem.q1">“I pay someone every month just to make rent invoices.”</li>
-        <li data-i18n="problem.q2">“I don’t know whether I or my tenant pays the GST.”</li>
-        <li data-i18n="problem.q3">“The TDS my tenant says they deducted doesn’t always match.”</li>
-        <li data-i18n="problem.q4">“I remember tax deadlines only when my accountant calls.”</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section section-ruled" id="how" aria-labelledby="how-title">
-    <div class="wrap">
-      <h2 id="how-title" data-i18n="how.title">How it works</h2>
-      <ol class="steps">
-        <li>
-          <h3 data-i18n="how.s1">Add your property once.</h3>
-          <p data-i18n="how.s1d">Shop, office or flat. Who rents it. Whether you have GST. A few clicks, no forms.</p>
-        </li>
-        <li>
-          <h3 data-i18n="how.s2">Mark rent received each month.</h3>
-          <p data-i18n="how.s2d">Enter what reached your bank and the TDS your tenant says they cut. We check if it adds up.</p>
-        </li>
-        <li>
-          <h3 data-i18n="how.s3">KirayaKhata tells you what is due next.</h3>
-          <p data-i18n="how.s3d">Every reminder says what to do, for which month, and by which date.</p>
-        </li>
-        <li>
-          <h3 data-i18n="how.s4">Download your year-end CA pack.</h3>
-          <p data-i18n="how.s4d">Clean, matched records for your CA, instead of photos and handwritten notes.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- COMPLIANCE PROMISE -->
-  <section class="section" id="promise" aria-labelledby="promise-title">
-    <div class="wrap promise">
-      <div>
-        <h2 id="promise-title" data-i18n="promise.title">Fixed rules do the maths. AI only explains.</h2>
-        <p data-i18n="promise.p1">KirayaKhata calculates the numbers using fixed tax rules. AI only explains them in simple language.</p>
-        <p data-i18n="promise.p2">Every tax rule records its official source and the date a CA last checked it. When a case is unclear, we say “A CA should confirm this” instead of guessing.</p>
-      </div>
-      <ol class="flow" aria-label="How a result is produced" data-i18n-aria="promise.flowLabel">
-        <li><span data-i18n="promise.f1">Your entries</span></li>
-        <li><span data-i18n="promise.f2">Fixed tax rules calculate</span></li>
-        <li><span data-i18n="promise.f3">AI explains in plain words</span></li>
-        <li class="flow-stamp"><span data-i18n="promise.f4">Prepared — verify before filing</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="section section-ruled" id="features" aria-labelledby="features-title">
-    <div class="wrap">
-      <h2 id="features-title" data-i18n="features.title">What KirayaKhata does for you</h2>
-      <div class="feature-grid">
-        <div class="feature">
-          <h3 data-i18n="features.g1">Every month</h3>
-          <ul>
-            <li data-i18n="features.g1a">Track rent for each property</li>
-            <li data-i18n="features.g1b">Check GST and TDS on the rent</li>
-            <li data-i18n="features.g1c">Make the rent receipt or invoice</li>
-            <li data-i18n="features.g1d">Spot short payments straight away</li>
-          </ul>
+        <div class="row-item" data-row="routine">
+          <button type="button" class="row-head" aria-expanded="false" aria-controls="rowp-routine">
+            <span class="row-title" data-i18n="row.routine">A monthly routine you can repeat</span>
+            <span class="row-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row-preview" id="rowp-routine" role="region" hidden>
+            <p data-i18n="row.routineP">Billing day, rent escalation, lease dates, pause/end controls and an approve-before-send preference. Unattended monthly sending needs the full app with your opt-in — a browser demo cannot run it on its own.</p>
+          </div>
         </div>
-        <div class="feature">
-          <h3 data-i18n="features.g2">What is due next</h3>
-          <ul>
-            <li data-i18n="features.g2a">Monthly GST reminders</li>
-            <li data-i18n="features.g2b">Advance-tax reminders</li>
-            <li data-i18n="features.g2c">Year-end tax reminders</li>
-            <li data-i18n="features.g2d">Rent agreement renewal and increase dates</li>
-          </ul>
+
+        <div class="row-item" data-row="payments">
+          <button type="button" class="row-head" aria-expanded="false" aria-controls="rowp-payments">
+            <span class="row-title" data-i18n="row.pay">Payments that make sense</span>
+            <span class="row-badge badge-demo" data-i18n="badge.demo">Available in this demo</span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row-preview" id="rowp-payments" role="region" hidden>
+            <p data-i18n="row.payP">Expected rent, GST, reported TDS, the amount actually received, and any shortfall or excess — each with a “Why?”. An arithmetic match can still need a tax review; we show both.</p>
+            <a class="row-link" href="#demo" data-i18n="row.payL">Check this month →</a>
+          </div>
         </div>
-        <div class="feature">
-          <h3 data-i18n="features.g3">Tax time</h3>
-          <ul>
-            <li data-i18n="features.g3a">Match TDS your tenants deducted</li>
-            <li data-i18n="features.g3b">Full-year rent summary</li>
-            <li data-i18n="features.g3c">One-click pack for your CA</li>
-          </ul>
+
+        <div class="row-item" data-row="deadlines">
+          <button type="button" class="row-head" aria-expanded="false" aria-controls="rowp-deadlines">
+            <span class="row-title" data-i18n="row.dead">Deadlines with a next step</span>
+            <span class="row-badge badge-demo" data-i18n="badge.demo">Available in this demo</span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row-preview" id="rowp-deadlines" role="region" hidden>
+            <p data-i18n="row.deadP">The month's and year's tax tasks, each with the form, the period, the due date, a link to the official portal and what to do there. Export them to your phone calendar.</p>
+            <a class="row-link" href="#calendar" data-i18n="row.deadL">See the tax calendar →</a>
+          </div>
         </div>
-        <div class="feature">
-          <h3 data-i18n="features.g4">Peace of mind</h3>
-          <ul>
-            <li data-i18n="features.g4a">Reminders before every date</li>
-            <li data-i18n="features.g4b">Alerts for missing documents</li>
-            <li data-i18n="features.g4c">Clear flags when a CA should look</li>
-          </ul>
+
+        <div class="row-item" data-row="yearend">
+          <button type="button" class="row-head" aria-expanded="false" aria-controls="rowp-yearend">
+            <span class="row-title" data-i18n="row.year">Year-end records, ready to review</span>
+            <span class="row-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </button>
+          <div class="row-preview" id="rowp-yearend" role="region" hidden>
+            <p data-i18n="row.yearP">A rent ledger, invoices, receipts, TDS evidence and unresolved items, organised for your CA. A single agreement is not enough to file a full income-tax return — this prepares records, it does not file.</p>
+            <a class="row-link" href="#yearend" data-i18n="row.yearL">See the year-end pack →</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LIVE DEMO: Close this month's rent -->
-  <section class="section demo" id="demo" aria-labelledby="demo-title">
+  <!-- ================= 03 / INVOICE STUDIO ================= -->
+  <section class="sec-paper" id="invoices" aria-labelledby="studio-title">
     <div class="wrap">
-      <h2 id="demo-title" data-i18n="demo.title">Close this month’s rent</h2>
-      <p class="section-lede" data-i18n="d.lede">See in seconds whether this month’s rent, GST and TDS add up — and what is due next. No login needed.</p>
+      <p class="sec-num sec-num-dark"><span>03</span> <span data-i18n="sec.studio">Invoice studio</span></p>
+      <h2 class="display display-dark" id="studio-title">
+        <span data-i18n="studio.t1">A rent invoice</span>
+        <span class="accent" data-i18n="studio.t2">in a few taps.</span>
+      </h2>
+      <p class="sec-lede sec-lede-dark" data-i18n="studio.sub">Pick a template, check the details, download a draft PDF. Names and GSTINs stay on your device. Every PDF is marked DRAFT / DEMO.</p>
+
+      <div class="studio">
+        <div class="studio-controls">
+          <fieldset class="studio-templates">
+            <legend data-i18n="studio.template">Template</legend>
+            <label class="tpl-opt"><input type="radio" name="tpl" value="classic" checked><span data-i18n="studio.tplClassic">Classic Ledger</span></label>
+            <label class="tpl-opt"><input type="radio" name="tpl" value="minimal"><span data-i18n="studio.tplMinimal">Modern Minimal</span></label>
+            <label class="tpl-opt"><input type="radio" name="tpl" value="letterhead"><span data-i18n="studio.tplLetter">Professional Letterhead</span></label>
+          </fieldset>
+
+          <div class="grid-2">
+            <div class="q"><label class="q-label" for="s-landlord" data-i18n="studio.landlord">Your name</label><input class="input" id="s-landlord" data-sf="landlordName" value="Rishabh Properties"></div>
+            <div class="q"><label class="q-label" for="s-tenant" data-i18n="studio.tenant">Tenant's name</label><input class="input" id="s-tenant" data-sf="tenantName" value="Acme Retail Pvt Ltd"></div>
+            <div class="q"><label class="q-label" for="s-prop" data-i18n="studio.property">Property</label><input class="input" id="s-prop" data-sf="propertyLabel" value="Shop 4, MG Road"></div>
+            <div class="q"><label class="q-label" for="s-period" data-i18n="studio.period">Billing period</label><input class="input" id="s-period" data-sf="period" value="September 2026"></div>
+            <div class="q"><label class="q-label" for="s-rent" data-i18n="studio.rent">Agreement rent (Rs.)</label><input class="input input-money" id="s-rent" data-sf="rent" inputmode="numeric" value="1,00,000"></div>
+            <div class="q"><label class="q-label" for="s-charges" data-i18n="studio.charges">Other charges (Rs.)</label><input class="input input-money" id="s-charges" data-sf="charges" inputmode="numeric" value="0"></div>
+          </div>
+
+          <fieldset class="studio-gst">
+            <legend data-i18n="studio.gstQ">GST treatment</legend>
+            <label class="tpl-opt"><input type="radio" name="sgst" value="fcm" checked><span data-i18n="studio.gstFcm">I collect 18% GST (registered, commercial)</span></label>
+            <label class="tpl-opt"><input type="radio" name="sgst" value="rcm"><span data-i18n="studio.gstRcm">Tenant pays GST (reverse charge) — none on my invoice</span></label>
+            <label class="tpl-opt"><input type="radio" name="sgst" value="none"><span data-i18n="studio.gstNone">No GST (exempt / unregistered)</span></label>
+          </fieldset>
+          <p class="studio-doc" id="studio-doc" aria-live="polite"></p>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="s-pdf" data-i18n="studio.pdf">Download draft PDF</button>
+            <button type="button" class="btn btn-quiet" id="s-email" data-i18n="studio.email">Open email draft</button>
+          </div>
+          <p class="q-hint" data-i18n="studio.emailNote">“Open email draft” opens your mail app with a summary. Attach the downloaded PDF before sending. Nothing is sent from here.</p>
+        </div>
+
+        <div class="studio-preview" aria-live="polite">
+          <div class="invoice-sheet" id="invoicePreview"></div>
+          <p class="q-hint center" data-i18n="studio.previewNote">Live preview · marked DRAFT / DEMO</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 / LIVE DEMO — Close this month's rent (PRESERVED) ================= -->
+  <section class="sec-paper demo" id="demo" aria-labelledby="demo-title">
+    <div class="wrap">
+      <p class="sec-num sec-num-dark"><span>04</span> <span data-i18n="sec.check">Check this month's rent</span></p>
+      <h2 id="demo-title" class="display display-dark" data-i18n="demo.title">Close this month's rent</h2>
+      <p class="sec-lede sec-lede-dark" data-i18n="d.lede">See in seconds whether this month's rent, GST and TDS add up — and what is due next. No login needed.</p>
 
       <div class="demo-start" id="demo-start">
         <div class="start-card start-example">
@@ -294,7 +327,7 @@
               <label class="rcard"><input type="radio" name="tenantType" value="firm"><span data-i18n="opt.firm">A partnership / LLP</span></label>
               <label class="rcard"><input type="radio" name="tenantType" value="individual_business"><span data-i18n="opt.indBiz">A person running a business</span></label>
               <label class="rcard"><input type="radio" name="tenantType" value="individual_personal"><span data-i18n="opt.indPersonal">A person, for personal use</span></label>
-              <label class="rcard"><input type="radio" name="tenantType" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+              <label class="rcard"><input type="radio" name="tenantType" value="unknown"><span data-i18n="opt.dontKnow">Don't know</span></label>
             </div>
           </fieldset>
           <fieldset class="q" data-field="tenantGst" data-show="tenantType=company,firm,individual_business">
@@ -303,15 +336,15 @@
             <div class="cards cards-3">
               <label class="rcard"><input type="radio" name="tenantGst" value="yes"><span data-i18n="opt.yes">Yes</span></label>
               <label class="rcard"><input type="radio" name="tenantGst" value="no"><span data-i18n="opt.no">No</span></label>
-              <label class="rcard"><input type="radio" name="tenantGst" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+              <label class="rcard"><input type="radio" name="tenantGst" value="unknown"><span data-i18n="opt.dontKnow">Don't know</span></label>
             </div>
           </fieldset>
           <fieldset class="q" data-field="composition" data-show="tenantGst=yes" data-show2="propertyType=commercial" data-show3="gstRegistered=no">
-            <legend data-i18n="f.composition">Does the tenant’s GST certificate say “Composition”?</legend>
+            <legend data-i18n="f.composition">Does the tenant's GST certificate say “Composition”?</legend>
             <div class="cards cards-3">
               <label class="rcard"><input type="radio" name="composition" value="yes"><span data-i18n="opt.yes">Yes</span></label>
               <label class="rcard"><input type="radio" name="composition" value="no"><span data-i18n="opt.no">No</span></label>
-              <label class="rcard"><input type="radio" name="composition" value="unknown"><span data-i18n="opt.dontKnow">Don’t know</span></label>
+              <label class="rcard"><input type="radio" name="composition" value="unknown"><span data-i18n="opt.dontKnow">Don't know</span></label>
             </div>
           </fieldset>
 
@@ -382,7 +415,7 @@
     </div>
   </section>
 
-  <!-- USAGE STRIP: read back from Supabase via /api/stats -->
+  <!-- ================= USAGE STRIP (PRESERVED) ================= -->
   <section class="usage" id="usage" aria-labelledby="usage-title">
     <div class="wrap">
       <h2 id="usage-title" class="usage-label" data-i18n="usage.label">Demo activity on this site</h2>
@@ -392,104 +425,147 @@
         <p class="usage-item"><span class="usage-num" id="u-caught">—</span><span data-i18n="usage.caught">in short payments and TDS gaps caught</span></p>
         <p class="usage-item"><span class="usage-num usage-text" id="u-common">—</span><span data-i18n="usage.common">most common case</span></p>
       </div>
+      <p class="usage-foot" data-i18n="usage.foot">Anonymised demo totals. “Caught” counts short payments and TDS gaps flagged in the demo — not money we recovered for anyone.</p>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section class="section" id="pricing" aria-labelledby="pricing-title">
+  <!-- ================= 05 / TAX CALENDAR ================= -->
+  <section class="sec-dark" id="calendar" aria-labelledby="cal-title">
     <div class="wrap">
-      <h2 id="pricing-title" data-i18n="pricing.title">Simple pricing</h2>
-      <p class="section-lede" data-i18n="pricing.sub">Indicative prices. The demo on this page is free.</p>
-      <div class="price-grid">
-        <div class="price">
-          <h3 data-i18n="pricing.t1">Starter</h3>
-          <p class="price-amt" data-i18n="pricing.t1p">Free</p>
-          <p data-i18n="pricing.t1d">1 property</p>
-        </div>
-        <div class="price price-main">
-          <h3 data-i18n="pricing.t2">Family</h3>
-          <p class="price-amt"><span>₹2,499</span><small data-i18n="pricing.perYear">/year</small></p>
-          <p data-i18n="pricing.t2d">Up to 5 properties</p>
-        </div>
-        <div class="price">
-          <h3 data-i18n="pricing.t3">With a CA</h3>
-          <p class="price-amt" data-i18n="pricing.t3p">Optional add-on</p>
-          <p data-i18n="pricing.t3d">CA review and filing help, priced separately</p>
+      <p class="sec-num"><span>05</span> <span data-i18n="sec.calendar">Calendar with a useful next step</span></p>
+      <h2 class="display" id="cal-title">
+        <span data-i18n="cal.t1">Never wonder</span>
+        <span class="accent" data-i18n="cal.t2">what's due next.</span>
+      </h2>
+      <p class="sec-lede" data-i18n="cal.sub">The month's and year's tax tasks, each with the form, the period, the due date, and what to do on the official portal. This is an example for a monthly GST filer in Maharashtra.</p>
+
+      <div class="cal-wrap">
+        <ol class="cal-list" id="calList"></ol>
+        <div class="cal-side">
+          <button type="button" class="btn btn-primary btn-block" id="cal-ics" data-i18n="cal.ics">Add these dates to my phone calendar</button>
+          <p class="q-hint" data-i18n="cal.icsNote">Downloads a calendar file with 5-day and 1-day reminders. It is a snapshot — it will not receive future government date extensions.</p>
+          <p class="cal-duties"><strong data-i18n="cal.dutiesT">Whose job is it?</strong><span data-i18n="cal.duties">GSTR-1 and GSTR-3B are the landlord's to report. Where the tenant pays GST under reverse charge, that duty is the tenant's. TDS certificates are collected from the tenant.</span></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOUNDER NOTE -->
-  <section class="section section-ruled" id="founder" aria-labelledby="founder-title">
-    <div class="wrap founder">
-      <h2 id="founder-title" data-i18n="founder.title">Why I built this</h2>
-      <blockquote>
-        <p data-i18n="founder.p1">My father rents out a few properties. Every month he depends on an accountant to make invoices, and on me to remember GST dates and check TDS. He doesn’t need a tax course. He needs one screen that tells him whether he is okay and what to do next.</p>
-        <p data-i18n="founder.p2">I’m a Chartered Accountant and CFA, now at ISB. KirayaKhata is the tool I wanted to give him.</p>
-        <footer>— Rishabh, CA, CFA</footer>
-      </blockquote>
-      <!-- PLACEHOLDER: Replace the block below with the LinkedIn launch copy. -->
-      <div class="placeholder-panel placeholder-dashed" data-placeholder="linkedin-launch-copy">
-        <p class="placeholder-head" data-i18n="founder.ph">[Placeholder] LinkedIn launch note goes here.</p>
+  <!-- ================= 06 / YEAR-END PACK ================= -->
+  <section class="sec-paper" id="yearend" aria-labelledby="yend-title">
+    <div class="wrap">
+      <p class="sec-num sec-num-dark"><span>06</span> <span data-i18n="sec.yearend">From month-end to year-end</span></p>
+      <h2 class="display display-dark" id="yend-title">
+        <span data-i18n="yend.t1">Your CA pack,</span>
+        <span class="accent" data-i18n="yend.t2">already organised.</span>
+      </h2>
+      <p class="sec-lede sec-lede-dark" data-i18n="yend.sub">At year-end, your records are gathered in one place for review. This prepares records for your CA — it does not file your return or replace professional advice.</p>
+      <div class="yend-grid">
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">📒</span><b data-i18n="yend.i1">Annual rent ledger</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">🧾</span><b data-i18n="yend.i2">Invoice & receipt index</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">📊</span><b data-i18n="yend.i3">GST treatment by period</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">📎</span><b data-i18n="yend.i4">TDS reported & certificate follow-up</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">⚠️</span><b data-i18n="yend.i5">Discrepancies & missing documents</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
+        <div class="yend-card"><span class="yend-ic" aria-hidden="true">📈</span><b data-i18n="yend.i6">Agreement escalation history</b><span class="yend-badge badge-plan" data-i18n="badge.plan">Planned for the full app</span></div>
       </div>
+      <p class="q-hint" data-i18n="yend.note">Preview only. These exports are built in the full app; nothing is generated or sent here.</p>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section" id="faq" aria-labelledby="faq-title">
+  <!-- ================= FAQ (PALE) ================= -->
+  <section class="sec-paper faq-sec" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq">
-      <h2 id="faq-title" data-i18n="faq.title">Questions landlords ask</h2>
+      <p class="sec-num sec-num-dark"><span>07</span> <span data-i18n="sec.faq">FAQs</span></p>
+      <h2 id="faq-title" class="display display-dark">
+        <span data-i18n="faq.t1">Good questions,</span>
+        <span class="accent" data-i18n="faq.t2">honest answers.</span>
+      </h2>
       <details>
-        <summary data-i18n="faq.q1">Do I still need a CA?</summary>
-        <p data-i18n="faq.a1">Yes, for review and filing. KirayaKhata does the routine monthly work — receipts, checking rent and TDS, tracking dates — so your CA gets clean numbers and spends time only where professional judgement is needed.</p>
+        <summary data-i18n="faq.q7">Residential or commercial — does it matter?</summary>
+        <p data-i18n="faq.a7">Yes. GST treats a house rented to someone who lives in it differently from a shop, office or warehouse, and the answer can change if the tenant is GST-registered or uses the home for business. KirayaKhata asks simple questions and, where the facts are unclear, says a CA should confirm.</p>
       </details>
       <details>
         <summary data-i18n="faq.q2">Does KirayaKhata file GST returns?</summary>
         <p data-i18n="faq.a2">Not today. It prepares the numbers and tells you what to report and by when. You or your CA file on the GST portal. We never ask for your GST portal password.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q3">Does KirayaKhata file my income-tax return?</summary>
-        <p data-i18n="faq.a3">Not today. It keeps a full-year record of rent and TDS and prepares a pack for your CA. Filing stays with you or your CA.</p>
+        <summary data-i18n="faq.q10">Who pays the GST — me or my tenant?</summary>
+        <p data-i18n="faq.a10">It depends. A registered landlord renting a shop usually adds GST to the invoice. In some cases the tenant pays GST directly under reverse charge, and you add none. Renting a home to live in is usually exempt. KirayaKhata works out the case or flags it for a CA.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q4">What happens if I miss a deadline?</summary>
-        <p data-i18n="faq.a4">The item moves to the top of your screen as overdue, with the next step. Late filing or payment can lead to late fees or interest, so speak to your CA promptly. We will not guess the penalty for you.</p>
+        <summary data-i18n="faq.q11">Why is the money in my bank less than the rent?</summary>
+        <p data-i18n="faq.a11">Some tenants deduct TDS (tax) from the rent and deposit it in your name. So your bank receipt is the invoice total minus the TDS. You get credit for that TDS in your tax return, so the amount should match what the tenant reports.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q5">How does it know what is due next?</summary>
-        <p data-i18n="faq.a5">It uses a fixed calendar of tax dates, your GST status, whether you file monthly or quarterly, and the rent you have marked. Every reminder says which month or year it is for. Each date rule records its official source and when a CA last checked it.</p>
+        <summary data-i18n="faq.q12">Can I choose how the invoice looks?</summary>
+        <p data-i18n="faq.a12">Yes — three templates (Classic Ledger, Modern Minimal, Professional Letterhead), all with the same figures. You get a live preview and a draft PDF. Every PDF is marked DRAFT / DEMO; verify before issuing.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q6">What is TDS?</summary>
-        <p data-i18n="faq.a6">Tax deducted at source. Some tenants, such as companies and many businesses, must keep back part of the rent as tax and deposit it with the government in your name. You get credit for it in your tax return, so it matters that the amount matches.</p>
+        <summary data-i18n="faq.q13">Does it send the invoice to my tenant automatically?</summary>
+        <p data-i18n="faq.a13">Not in this demo. “Open email draft” opens your own mail app with a summary; you attach the downloaded PDF and send it yourself. A browser page cannot attach a file for you or send on a schedule — that is planned for the full app, with your opt-in.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q7">Residential or commercial — does it matter?</summary>
-        <p data-i18n="faq.a7">Yes. GST treats a house rented to someone who lives in it differently from a shop, office or warehouse, and the answer can change if the tenant is GST-registered or uses the home for business. KirayaKhata asks simple questions and, where the facts are unclear, says a CA should confirm.</p>
+        <summary data-i18n="faq.q14">Do the calendar dates stay up to date?</summary>
+        <p data-i18n="faq.a14">The on-page dates use a fixed rule set with a review date. The calendar file you download is a snapshot at that moment; it will not receive future government extensions automatically.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q8">Is my tax information safe?</summary>
+        <summary data-i18n="faq.q1">Do I still need a CA?</summary>
+        <p data-i18n="faq.a1">Yes, for review and filing. KirayaKhata does the routine monthly work — receipts, checking rent and TDS, tracking dates — so your CA gets clean numbers and spends time only where professional judgement is needed.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.q8">Is my information safe?</summary>
         <p data-i18n="faq.a8">We never ask for your PAN, bank details or portal passwords. What our server saves is anonymised, such as the rent amount and property type. Names, GSTINs and emails you type for an invoice stay on your device and are never sent to us.</p>
       </details>
       <details>
-        <summary data-i18n="faq.q9">Which tax year am I currently working on?</summary>
-        <p data-i18n="faq.a9">Indian tax years run from 1 April to 31 March. You don’t need to remember which one is current: KirayaKhata works it out from the date of each rent payment and labels it plainly, for example “Rent earned Apr 2026–Mar 2027”.</p>
+        <summary data-i18n="faq.q9">Which tax year am I working on, and is it in Hindi?</summary>
+        <p data-i18n="faq.a9">Indian tax years run 1 April to 31 March; KirayaKhata works it out from each rent date and labels it plainly, e.g. “Rent earned Apr 2026–Mar 2027”. The whole page works in English and Hindi — use the toggle at the top.</p>
       </details>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="closing" aria-labelledby="closing-title">
+    <div class="glow glow-rose" aria-hidden="true"></div>
+    <div class="wrap closing-inner">
+      <h2 class="display" id="closing-title">
+        <span data-i18n="close.t1">Make next month's rent</span>
+        <span class="accent" data-i18n="close.t2">easier.</span>
+      </h2>
+      <div class="hero2-ctas center">
+        <a class="btn btn-pill btn-primary" href="#demo" data-i18n="cta.tryExample">Try a ready example</a>
+        <button type="button" class="btn btn-pill btn-ghost" id="close-own" data-i18n="cta.ownDetails">Enter my own details</button>
+      </div>
+      <p class="hero2-quiet" data-i18n="hero.quiet">No login needed for the demo · English and Hindi</p>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap footer-row">
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer2">
+  <div class="wrap">
+    <div class="footer2-cols">
+      <div>
+        <p class="foot-h" data-i18n="foot.explore">Explore</p>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#invoices" data-i18n="nav.invoices">Invoices</a>
+        <a href="#calendar" data-i18n="nav.calendar">Tax calendar</a>
+        <a href="#faq" data-i18n="nav.faq">FAQs</a>
+      </div>
+      <div>
+        <p class="foot-h" data-i18n="foot.official">Official sources</p>
+        <a href="https://www.gst.gov.in/" target="_blank" rel="noopener noreferrer">GST Portal ↗</a>
+        <a href="https://www.incometax.gov.in/" target="_blank" rel="noopener noreferrer">Income Tax ↗</a>
+        <a href="https://cbic-gst.gov.in/" target="_blank" rel="noopener noreferrer">CBIC GST ↗</a>
+      </div>
+      <div>
+        <p class="foot-h" data-i18n="foot.about">About</p>
+        <a href="https://github.com/rishabhrajrb-dotcom/kirayakhata" target="_blank" rel="noopener noreferrer" data-i18n="footer.github">Source code on GitHub</a>
+        <span class="foot-byline"><span class="seal" aria-hidden="true">CA</span><span data-i18n="hero.byline">Built by a Chartered Accountant.</span></span>
+      </div>
+    </div>
     <p class="footer-disclaimer" data-i18n="footer.disclaimer">Prepared for review. Tax treatment may depend on individual facts.</p>
     <p class="footer-small" data-i18n="footer.noFiling">KirayaKhata does not file returns or make payments on your behalf.</p>
-    <p class="footer-links">
-      <!-- PLACEHOLDER: set the public GitHub repository URL. -->
-      <a href="#" data-placeholder="github-url" data-i18n="footer.github">Source code on GitHub</a>
-      <span aria-hidden="true">·</span>
-      <span>© 2026 KirayaKhata</span>
-    </p>
+    <div class="footer-wordmark" aria-hidden="true"><span class="fw-latin">KirayaKhata</span><span class="fw-deva" lang="hi">किरायाखाता</span></div>
+    <p class="footer-copy">© 2026 KirayaKhata</p>
   </div>
 </footer>
 </body>

@@ -146,3 +146,123 @@ export async function downloadPdf(resp, local) {
 
   doc.save(`kirayakhata-${type.toLowerCase()}-${r.period.month}-DRAFT.pdf`);
 }
+
+// ---------- Invoice Studio: three draft templates ----------
+// `data` carries pre-formatted/pre-computed values (amounts computed in the
+// caller from the shared config). This module only lays them out.
+
+function invHeaderNumber(period) {
+  const p = (period || "").replace(/[^0-9]/g, "").slice(0, 6) || "000000";
+  return `KK-DEMO-${p}-001`;
+}
+
+function watermark(doc, W) {
+  doc.saveGraphicsState();
+  doc.setGState(new doc.GState({ opacity: 0.08 }));
+  doc.setTextColor(142, 27, 27);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(68);
+  doc.text("DRAFT / DEMO", W / 2, 170, { align: "center", angle: 35 });
+  doc.restoreGraphicsState();
+}
+
+function invFooter(doc, W, data) {
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(74, 81, 99);
+  doc.text("Prepared with KirayaKhata — verify before filing.", W / 2, 282, { align: "center" });
+  doc.text(data.footerMeta || "DRAFT / DEMO — not a valid tax document", W / 2, 287, { align: "center" });
+}
+
+function lineItems(doc, data, W, M, y, accent) {
+  doc.setDrawColor(228, 231, 238);
+  doc.setFillColor(250, 250, 247);
+  doc.rect(M, y - 5, W - 2 * M, 8, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(30, 36, 51);
+  doc.text("Description", M + 3, y);
+  doc.text("Amount", W - M - 3, y, { align: "right" });
+  doc.setFont("helvetica", "normal");
+  for (const row of data.rows) {
+    y += 8;
+    if (row.strong) doc.setFont("helvetica", "bold"); else doc.setFont("helvetica", "normal");
+    doc.text(row.label, M + 3, y);
+    doc.text(row.amount, W - M - 3, y, { align: "right" });
+    doc.setDrawColor(228, 231, 238);
+    doc.line(M, y + 3, W - M, y + 3);
+  }
+  doc.setFont("helvetica", "normal");
+  return y + 12;
+}
+
+function partyBlock(doc, M, W, y, data) {
+  const colW = (W - 2 * M - 8) / 2;
+  const put = (x, title, name, extra) => {
+    let yy = y;
+    doc.setFont("helvetica", "bold"); doc.setTextColor(30, 36, 51);
+    doc.text(title, x, yy);
+    doc.setFont("helvetica", "normal");
+    doc.text(name || "—", x, (yy += 6), { maxWidth: colW });
+    if (extra) doc.text(extra, x, (yy += 6), { maxWidth: colW });
+    return yy;
+  };
+  const a = put(M, "From (landlord)", data.landlordName, data.landlordExtra);
+  const b = put(M + colW + 8, "To (tenant)", data.tenantName, data.propertyLabel ? `Property: ${data.propertyLabel}` : "");
+  return Math.max(a, b) + 10;
+}
+
+export async function downloadInvoicePdf(template, data) {
+  const JsPDF = await loadJsPdf();
+  const doc = new JsPDF({ unit: "mm", format: "a4" });
+  const W = 210, M = 18;
+  const number = invHeaderNumber(data.period);
+  watermark(doc, W);
+  let y = 22;
+
+  if (template === "minimal") {
+    doc.setFont("helvetica", "bold"); doc.setTextColor(30, 36, 51); doc.setFontSize(22);
+    doc.text(data.title.toUpperCase(), W - M, y, { align: "right" });
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(142, 27, 27);
+    doc.text("DRAFT / DEMO", W - M, (y += 6), { align: "right" });
+    doc.setDrawColor(30, 36, 51); doc.setLineWidth(0.4); doc.line(M, (y += 6), W - M, y);
+    doc.setLineWidth(0.2);
+  } else if (template === "letterhead") {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(16); doc.setTextColor(30, 36, 51);
+    doc.text(data.landlordName || "Landlord", W / 2, y, { align: "center" });
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(74, 81, 99);
+    doc.text(data.propertyLabel || "", W / 2, (y += 5.5), { align: "center" });
+    doc.setDrawColor(224, 161, 0); doc.setLineWidth(0.8); doc.line(M, (y += 4), W - M, y); doc.setLineWidth(0.2);
+    doc.setFont("helvetica", "bold"); doc.setFontSize(14); doc.setTextColor(30, 36, 51);
+    doc.text(data.title.toUpperCase(), W / 2, (y += 10), { align: "center" });
+  } else { // classic ledger
+    doc.setFillColor(142, 27, 27); doc.rect(0, 0, W, 9, "F");
+    doc.setFillColor(224, 161, 0); doc.rect(0, 9, W, 1.6, "F");
+    doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(30, 36, 51);
+    doc.text(data.title.toUpperCase(), M, (y += 6));
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(142, 27, 27);
+    doc.text("DRAFT / DEMO — not a valid tax document", W - M, y, { align: "right" });
+  }
+
+  doc.setFont("helvetica", "normal"); doc.setTextColor(30, 36, 51); doc.setFontSize(10);
+  y += 9;
+  doc.text(`Number: ${number} (draft)`, M, y);
+  doc.text(`Date: ${data.dateLabel}`, W - M, y, { align: "right" });
+  doc.text(`Rent period: ${data.period}`, M, (y += 6));
+  if (data.rcm) doc.text("Tax payable on reverse charge: YES", W - M, y, { align: "right" });
+
+  y = partyBlock(doc, M, W, (y += 10), data);
+  y = lineItems(doc, data, W, M, y, template);
+
+  if (data.notes && data.notes.length) {
+    doc.setFontSize(9.5); doc.setTextColor(30, 36, 51);
+    for (const n of data.notes) {
+      const lines = doc.splitTextToSize(n, W - 2 * M);
+      doc.text(lines, M, y); y += lines.length * 5 + 2;
+    }
+  }
+  doc.setFontSize(10); doc.setTextColor(30, 36, 51);
+  doc.text("Signature", W - M, 250, { align: "right" });
+  doc.setDrawColor(120, 120, 120); doc.line(W - M - 50, 244, W - M, 244);
+  invFooter(doc, W, data);
+  doc.save(`kirayakhata-invoice-${template}-DRAFT.pdf`);
+}

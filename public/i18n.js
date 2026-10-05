@@ -3,6 +3,7 @@
 // those live only in shared/compliance-config.js.
 
 import { APP_STRINGS } from "./i18n-app.js";
+import { LANDING_STRINGS } from "./i18n-landing.js";
 
 const PAGE_STRINGS = {
   en: {
@@ -269,8 +270,8 @@ const PAGE_STRINGS = {
 };
 
 export const STRINGS = {
-  en: { ...PAGE_STRINGS.en, ...APP_STRINGS.en },
-  hi: { ...PAGE_STRINGS.hi, ...APP_STRINGS.hi },
+  en: { ...PAGE_STRINGS.en, ...APP_STRINGS.en, ...LANDING_STRINGS.en },
+  hi: { ...PAGE_STRINGS.hi, ...APP_STRINGS.hi, ...LANDING_STRINGS.hi },
 };
 
 export const SUPPORTED = Object.keys(STRINGS);
